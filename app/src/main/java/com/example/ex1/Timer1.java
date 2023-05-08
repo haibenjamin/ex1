@@ -13,6 +13,7 @@ public class Timer1 {
 
     private long startTime = 0;
     private final int DELAY = 1000;
+    private double speed;
 
     private final Handler handler = new Handler();
 
@@ -24,17 +25,18 @@ public class Timer1 {
     private ShapeableImageView[][] obstacles;
     private ShapeableImageView[] main_IMG_hearts;
 
-    public Timer1(gameManager gm, Integer ROWS, Integer COLS, ShapeableImageView[][] obstacles,ShapeableImageView[] main_IMG_hearts) {
+    public Timer1(gameManager gm, Integer ROWS, Integer COLS, ShapeableImageView[][] obstacles,ShapeableImageView[] main_IMG_hearts,double speed) {
         this.gm = gm;
         this.rows = ROWS;
         this.cols = COLS;
         this.obstacles = obstacles;
         this.main_IMG_hearts=main_IMG_hearts;
+        this.speed=speed;
     }
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            handler.postDelayed(this, DELAY); //Do it again in a second
+            handler.postDelayed(this, (int)(DELAY*speed)); //Do it again in a second
             if(gm.isHit()) {
                 Log.d("isHIT", "hit" );
                 gm.crash();
@@ -49,7 +51,7 @@ public class Timer1 {
     private Runnable runnable2 = new Runnable() {
         @Override
         public void run() {
-            handler.postDelayed(this, DELAY*2); //Do it again in a second
+            handler.postDelayed(this, (int)(DELAY*speed)); //Do it again in a second
             gm.addObstacle(gm.rollCol());
             refreshUI();
         }

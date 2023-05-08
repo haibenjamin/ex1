@@ -16,7 +16,7 @@ public class gameManager extends AppCompatActivity {
 
     final int MID =1;
     final int LEFT_BOUND=0;
-    final int RIGHT_BOUND=2;
+    final int RIGHT_BOUND=4;
     ShapeableImageView[] player;
     ShapeableImageView[][] obstacles;
     Context context;
