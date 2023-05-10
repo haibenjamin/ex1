@@ -1,31 +1,50 @@
 package com.example.ex1;
 
+import com.example.ex1.Interface.gameOverCallable;
+import com.example.ex1.Logic.DataManager;
 import com.example.ex1.Logic.gameManager;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.Vibrator;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity  {
 
-     final int ROWS=5;
+    public static final String NAME ="KEY_NAME" ;
+    public static final String SPEED = "KEY_SPEED";
+    final int ROWS=5;
      final int COLS=5;
     private ShapeableImageView[] main_IMG_hearts;
     private ShapeableImageView[] player;
     private ShapeableImageView[][] obstacles;
+    private ShapeableImageView[][] collecetables;
     private FloatingActionButton fabLeft,fabRight;
     private FloatingActionButton[] fab;
     int currPlayerPos;
     private gameManager gm;
     private Timer1 timer;
+    private String name;
 
-    public static final String SPEED = "KEY_SPEED";
+
+
     private double speed;
+    private int score=0;
+    private gameOverCallable gameOverCallable;
+
+    public void setGameOverCallback(gameOverCallable gameOverCallable) {
+        this.gameOverCallable = gameOverCallable;
+    }
 
 
 
@@ -41,14 +60,30 @@ public class GameActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_launcher_background);
 
         initScreen(obstacles,player,main_IMG_hearts);
-        gm= new gameManager(ROWS,COLS);
-        gm.setContext(getApplicationContext());
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        gm.setVibrator(v);
+        setGameOverCallback(new gameOverCallable() {
+            @Override
+            public void GameOver() {
+                timer.stopTime();
+                finish();
+                startActivity(new Intent(GameActivity.this, MainActivity.class));
+
+            }
+        });
         Intent prevIntent = getIntent();
         speed=prevIntent.getDoubleExtra("KEY_SPEED",1.0);
-        timer=new Timer1(gm, ROWS, COLS, obstacles,main_IMG_hearts,speed);
+        name=prevIntent.getStringExtra("KEY_NAME");
+        if(name==null|| name.equals(""))
+            name="player";
+        gm= new gameManager(ROWS,COLS,gameOverCallable);
+        gm.setContext(getApplicationContext());
+        gm.setName(name);
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        gm.setVibrator(v);
+        timer=new Timer1(gm, ROWS, COLS,collecetables, obstacles,main_IMG_hearts,speed);
         timer.startTime();
+
+
+
 
         fab[0].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +104,17 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.stopTime();
+    }
 
-
-
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer.startTime();
+    }
 
     private void movePlayer(int currPlayerPos) {
         for (int i = 0; i < player.length; i++) {
@@ -92,6 +132,8 @@ public class GameActivity extends AppCompatActivity {
            for (int i = 0; i <ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 obstacles[i][j].setVisibility(View.INVISIBLE);
+                collecetables[i][j].setVisibility(View.INVISIBLE);
+
             }
         }
         player[0].setVisibility(View.INVISIBLE);
@@ -123,7 +165,8 @@ public class GameActivity extends AppCompatActivity {
                 findViewById(R.id.player5),
         };
         obstacles =new ShapeableImageView[][] {
-                { findViewById(R.id.obstacle00),
+                {
+                    findViewById(R.id.obstacle00),
                 findViewById(R.id.obstacle01),
                 findViewById(R.id.obstacle02),
                         findViewById(R.id.obstacle03),
@@ -148,12 +191,41 @@ public class GameActivity extends AppCompatActivity {
                 findViewById(R.id.obstacle42),
                 findViewById(R.id.obstacle43),
                 findViewById(R.id.obstacle44) }};
+        collecetables =new ShapeableImageView[][] {
+                { findViewById(R.id.cheese00),
+                        findViewById(R.id.cheese01),
+                        findViewById(R.id.cheese02),
+                        findViewById(R.id.cheese03),
+                        findViewById(R.id.cheese04) },
+                { findViewById(R.id.cheese10),
+                        findViewById(R.id.cheese11),
+                        findViewById(R.id.cheese12),
+                        findViewById(R.id.cheese13),
+                        findViewById(R.id.cheese14) },
+                { findViewById(R.id.cheese20),
+                        findViewById(R.id.cheese21),
+                        findViewById(R.id.cheese22),
+                        findViewById(R.id.cheese23),
+                        findViewById(R.id.cheese24) },
+                {       findViewById(R.id.cheese30),
+                        findViewById(R.id.cheese31),
+                        findViewById(R.id.cheese32),
+                        findViewById(R.id.cheese33),
+                        findViewById(R.id.cheese34) }
+                ,{
+                findViewById(R.id.cheese40),
+                findViewById(R.id.cheese41),
+                findViewById(R.id.cheese42),
+                findViewById(R.id.cheese43),
+                findViewById(R.id.cheese44) }};
 
 
-        ;
+
 
     }
     public void setSpeed(double speed){
         this.speed=speed;
     }
+
+
 }

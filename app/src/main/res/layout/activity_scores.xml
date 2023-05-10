@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="10dp"
     tools:context=".GameActivity">
 
 
@@ -14,15 +14,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="20dp"
+        android:padding="10dp"
         android:background="@color/blue_500"
     >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_LST_movies"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scores_text_HighScores"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            tools:listitem="@layout/movie_item" />
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:text="High Scores"></androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scores_LST_scores"
+            android:layout_width="match_parent"
+            android:layout_height="325dp"
+            android:layout_below="@id/scores_text_HighScores"
+
+            tools:listitem="@layout/score_item" />
 
     </FrameLayout>
 

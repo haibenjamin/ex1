@@ -89,6 +89,53 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/tom" />
         ></LinearLayout>
+    <LinearLayout
+        android:id="@+id/main_LAYOUT_collectable0"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@id/main_LAYOUT_obstacle1"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese00"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese02"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese03"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese04"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        ></LinearLayout>
 
     <LinearLayout
         android:id="@+id/main_LAYOUT_obstacle1"
@@ -132,6 +179,53 @@
             app:srcCompat="@drawable/tom" />
         ></LinearLayout>
     <LinearLayout
+        android:id="@+id/main_LAYOUT_collectable1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@id/main_LAYOUT_obstacle2"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese12"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese13"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese14"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        ></LinearLayout>
+    <LinearLayout
         android:id="@+id/main_LAYOUT_obstacle2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -172,6 +266,53 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@drawable/tom" />
+        ></LinearLayout>
+    <LinearLayout
+        android:id="@+id/main_LAYOUT_collectable2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@id/main_LAYOUT_obstacle3"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese21"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese22"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese23"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese24"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
         ></LinearLayout>
 
     <LinearLayout
@@ -218,6 +359,53 @@
             app:srcCompat="@drawable/tom" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/main_LAYOUT_collectable3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@id/main_LAYOUT_obstacle4"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese30"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese31"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese32"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese34"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        ></LinearLayout>
+    <LinearLayout
         android:id="@+id/main_LAYOUT_obstacle4"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -258,6 +446,53 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@drawable/tom" />
+        ></LinearLayout>
+    <LinearLayout
+        android:id="@+id/main_LAYOUT_collectable4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@id/main_LAYOUT_vehicle"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese40"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese41"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            app:srcCompat="@drawable/cheese" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese42"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese43"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cheese44"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:srcCompat="@drawable/cheese" />
         ></LinearLayout>
     <LinearLayout
         android:id="@+id/main_LAYOUT_vehicle"

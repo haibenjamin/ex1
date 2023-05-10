@@ -39,6 +39,22 @@
 
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/main_ET_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="player"/>
+
+
+
+    </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

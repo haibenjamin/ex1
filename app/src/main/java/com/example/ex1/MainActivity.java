@@ -1,6 +1,7 @@
 package com.example.ex1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +10,17 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ex1.Logic.sensorManager;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button[] buttons;
+    private AppCompatEditText main_ET_name;
     GameActivity game = new GameActivity();
     final double SLOW = 1;
     final double FAST = 0.4;
     private double speed=1.0;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ buttons[0].setOnClickListener(new View.OnClickListener() {
         Toast toast = Toast.makeText(getApplicationContext(), text, duration);
         toast.show();
         i.putExtra(GameActivity.SPEED,speed);
+        i.putExtra(GameActivity.NAME,main_ET_name.getText().toString());
         startActivity(i);
     }
 });
@@ -71,6 +76,13 @@ speed=FAST;
                 toast.show();
             }
         });
+        buttons[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sensorManager sm = new sensorManager(getApplicationContext());
+
+            }
+        });
 
 
 
@@ -82,7 +94,7 @@ speed=FAST;
 
         buttons=new Button[]{findViewById(R.id.startGame),findViewById(R.id.highScores),findViewById(R.id.fast)
                 ,findViewById(R.id.slow),findViewById(R.id.arrowsMode),findViewById(R.id.sensorMode)};
-
+main_ET_name=findViewById(R.id.main_ET_name);
 
     }
 }
