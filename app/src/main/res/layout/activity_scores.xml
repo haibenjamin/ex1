@@ -15,29 +15,61 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="10dp"
-        android:background="@color/blue_500"
-    >
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/scores_text_HighScores"
+        android:background="@color/blue_500">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:text="High Scores"></androidx.appcompat.widget.AppCompatTextView>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/scores_LST_scores"
-            android:layout_width="match_parent"
-            android:layout_height="325dp"
-            android:layout_below="@id/scores_text_HighScores"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scores_text_HighScores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="50sp"
+                android:text="High Scores"></androidx.appcompat.widget.AppCompatTextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="30sp"
+                    android:text="Name ">
+                </androidx.appcompat.widget.AppCompatTextView>
 
-            tools:listitem="@layout/score_item" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="30sp"
+                    android:text="Distance ">
+                </androidx.appcompat.widget.AppCompatTextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="30sp"
+                    android:text="Points ">
+                </androidx.appcompat.widget.AppCompatTextView>
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/scores_LST_scores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                tools:listitem="@layout/score_item" />
+
+        </LinearLayout>
+
 
     </FrameLayout>
 
 
 
     <FrameLayout
-        android:id="@+id/main_FRAME_map"
+        android:id="@+id/scores_FRAME_map"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

@@ -3,11 +3,8 @@ package com.example.ex1;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-import android.content.Context;
 
-import com.example.ex1.Interface.gameOverCallable;
-import com.example.ex1.Logic.gameManager;
+import com.example.ex1.Logic.GameManager;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class Timer1 {
@@ -19,20 +16,22 @@ public class Timer1 {
 
     private final Handler handler = new Handler();
 
-    private gameManager gm;
-    private Integer rows;
+    private GameManager gm;
+    private int rows;
 
-    private Integer cols;
+    private int cols;
 
     private ShapeableImageView[][] obstacles;
     private ShapeableImageView[][] collectables;
+    private ShapeableImageView[] player;
     private ShapeableImageView[] main_IMG_hearts;
 
-    public Timer1(gameManager gm, Integer ROWS, Integer COLS, ShapeableImageView[][] collectables,ShapeableImageView[][] obstacles,ShapeableImageView[] main_IMG_hearts,double speed) {
+    public Timer1(GameManager gm, int ROWS, int COLS,ShapeableImageView[] player, ShapeableImageView[][] collectables, ShapeableImageView[][] obstacles, ShapeableImageView[] main_IMG_hearts, double speed) {
         this.gm = gm;
         this.rows = ROWS;
         this.cols = COLS;
         this.obstacles = obstacles;
+        this.player=player;
         this.collectables=collectables;
         this.main_IMG_hearts=main_IMG_hearts;
         this.speed=speed;
@@ -109,6 +108,16 @@ public class Timer1 {
 
 
 
+            }
+
+        }
+        for (int i = 0; i <cols; i++) {
+            if (gm.getCurrPlayerPos()==i){
+                player[i].setVisibility(View.VISIBLE);
+
+            }
+            else{
+                player[i].setVisibility(View.INVISIBLE);
             }
 
         }

@@ -9,13 +9,16 @@ public class Score  {
     private String name;
     private int distance;
     private int points;
-    private Point location;
+    private double longitude;
+    private double latitude;
 
-    public Score(String name,int distance, int points,Point location){
+    public Score(String name,int distance, int points,double longitude,double latitude){
         this.name=name;
         this.distance=distance;
         this.points=points;
-        this.location=location;
+        this.longitude=longitude;
+        this.latitude=latitude;
+
     }
 
     public String getName(){
@@ -29,4 +32,9 @@ public class Score  {
     public int getPoints() {
         return this.points;
     }
+    public double getLongitude(){
+        return this.longitude;
+    }
+    public double getLatitude(){return this.latitude;}
+
 }

@@ -1,21 +1,17 @@
 package com.example.ex1;
 
+import com.example.ex1.Interface.CallBackTilt;
 import com.example.ex1.Interface.gameOverCallable;
-import com.example.ex1.Logic.DataManager;
-import com.example.ex1.Logic.gameManager;
+import com.example.ex1.Logic.GameManager;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
+import com.example.ex1.Logic.StepDetector;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -23,24 +19,25 @@ public class GameActivity extends AppCompatActivity  {
 
     public static final String NAME ="KEY_NAME" ;
     public static final String SPEED = "KEY_SPEED";
+    public static final String MODE = "KEY_MODE";
+    final int ARROWS_MODE=0;
+    final int SENSORS_MODE=1;
     final int ROWS=5;
      final int COLS=5;
     private ShapeableImageView[] main_IMG_hearts;
     private ShapeableImageView[] player;
     private ShapeableImageView[][] obstacles;
     private ShapeableImageView[][] collecetables;
-    private FloatingActionButton fabLeft,fabRight;
     private FloatingActionButton[] fab;
     int currPlayerPos;
-    private gameManager gm;
+    private GameManager gm;
     private Timer1 timer;
     private String name;
-
-
-
+    private int mode;
     private double speed;
     private int score=0;
     private gameOverCallable gameOverCallable;
+    private StepDetector sensorManager;
 
     public void setGameOverCallback(gameOverCallable gameOverCallable) {
         this.gameOverCallable = gameOverCallable;
@@ -57,7 +54,7 @@ public class GameActivity extends AppCompatActivity  {
                 .with(this)
                 .load("https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg")
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background);
+                .placeholder(R.drawable.floor);
 
         initScreen(obstacles,player,main_IMG_hearts);
         setGameOverCallback(new gameOverCallable() {
@@ -72,14 +69,13 @@ public class GameActivity extends AppCompatActivity  {
         Intent prevIntent = getIntent();
         speed=prevIntent.getDoubleExtra("KEY_SPEED",1.0);
         name=prevIntent.getStringExtra("KEY_NAME");
+        mode=prevIntent.getIntExtra("KEY_MODE",0);
+        setMode(mode);
         if(name==null|| name.equals(""))
             name="player";
-        gm= new gameManager(ROWS,COLS,gameOverCallable);
-        gm.setContext(getApplicationContext());
+        gm= new GameManager(ROWS,COLS,gameOverCallable);
         gm.setName(name);
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        gm.setVibrator(v);
-        timer=new Timer1(gm, ROWS, COLS,collecetables, obstacles,main_IMG_hearts,speed);
+        timer=new Timer1(gm, ROWS, COLS,player,collecetables, obstacles,main_IMG_hearts,speed);
         timer.startTime();
 
 
@@ -104,16 +100,53 @@ public class GameActivity extends AppCompatActivity  {
         });
     }
 
+    private void setMode(int mode) {
+        if(mode==ARROWS_MODE){
+            fab[0].setVisibility(View.VISIBLE);
+            fab[1].setVisibility(View.VISIBLE);
+            if(sensorManager!=null)
+                sensorManager.stop();
+
+        }
+        else{
+            //mode==SENSOR_MODE
+            sensorManager=new StepDetector(this, new CallBackTilt() {
+                @Override
+                public void updatePlayerPos( ) {
+
+                    currPlayerPos= sensorManager.getPlayerPos();
+                    gm.setCurrPlayerPos(currPlayerPos);
+                    timer.refreshUI();
+                    Log.d("playerpos",""+currPlayerPos);
+
+
+
+                }
+
+            });
+
+            fab[0].setVisibility(View.GONE);
+            fab[1].setVisibility(View.GONE);
+            sensorManager.start();
+
+        }
+
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
         timer.stopTime();
+        if(sensorManager!=null)
+            sensorManager.stop();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         timer.startTime();
+        if(sensorManager!=null)
+            sensorManager.start();
     }
 
     private void movePlayer(int currPlayerPos) {

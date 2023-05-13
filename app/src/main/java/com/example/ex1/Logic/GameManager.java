@@ -2,13 +2,10 @@ package com.example.ex1.Logic;
 
 import com.example.ex1.Interface.gameOverCallable;
 import com.example.ex1.Score;
+import com.example.ex1.Utillities.SignalGenerator;
 import com.google.android.material.imageview.ShapeableImageView;
 
-import android.content.Context;
 import android.graphics.Point;
-import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
-public class gameManager extends AppCompatActivity {
+public class GameManager extends AppCompatActivity {
     int cols,rows,currPlayerPos,currObsPos,currCollectablePos,mid;
     final int COLLECTABLE_VALUE=10;
     final int METER_VALUE=1;
@@ -31,16 +28,16 @@ public class gameManager extends AppCompatActivity {
     ShapeableImageView[] player;
     ShapeableImageView[][] obstacles;
     Random rnd;
-    Context context;
-    Vibrator v;
+
 
     private int mat[][];
     private Score score;
    private int wrong;
+   private SignalGenerator signalGenerator;
 
    private gameOverCallable gameOverCallable;
 
-    public gameManager(int rows, int cols, gameOverCallable gameOverCallable){
+    public GameManager(int rows, int cols, gameOverCallable gameOverCallable){
         this.cols=cols;
         this.rows=rows;
         wrong=0;
@@ -72,9 +69,6 @@ public class gameManager extends AppCompatActivity {
       return this.cols;
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
     public boolean isGameOver(){
         if(this.wrong==LIVES)
             return true;
@@ -83,7 +77,7 @@ public class gameManager extends AppCompatActivity {
     public void gameOverIfNeeded(){
         if(isGameOver()){
             gameOverCallable.GameOver();
-            score = new Score(name,distance,points,new Point(0,0));
+            score = new Score(name,distance,points,0,0);
             DataManager.getInstance().addScore(score);
             Log.d( "data:",DataManager.getInstance().getScores().get(0).getName());
 
@@ -185,18 +179,10 @@ public class gameManager extends AppCompatActivity {
     }
 
     public void crash() {
-        CharSequence text = "crashed";
+        String text = "crashed";
         int duration = Toast.LENGTH_SHORT;
-
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            //deprecated in API 26
-            v.vibrate(500);
-        }
+        signalGenerator.getInstance().toast(text,duration);
+        signalGenerator.getInstance().vibrate(500);
         wrong++;
 
 
@@ -204,9 +190,6 @@ public class gameManager extends AppCompatActivity {
 
     }
 
-    public void setVibrator(Vibrator v) {
-        this.v=v;
-    }
     public void setScore(Score score){
 
     }
@@ -238,6 +221,10 @@ public class gameManager extends AppCompatActivity {
     }
     public Score getScore(){
         return this.score;
+    }
+
+    public void setCurrPlayerPos(int currPlayerPos) {
+        this.currPlayerPos=currPlayerPos;
     }
 }
 

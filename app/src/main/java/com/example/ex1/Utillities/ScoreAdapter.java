@@ -1,5 +1,8 @@
 package com.example.ex1.Utillities;
 
+import com.example.ex1.Interface.CallBackList;
+
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ex1.Interface.CallBackList;
 import com.example.ex1.R;
 import com.example.ex1.Score;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -24,22 +28,28 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
 
         this.scores = scores;
     }
+    private CallBackList callBackList;
+
+    public void setScoreCallback(CallBackList callBackList) {
+        this.callBackList = callBackList;
+    }
 
 
     @NonNull
     @Override
     public ScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.score_item, parent, false);
-        ScoreViewHolder movieViewHolder = new ScoreViewHolder(view);
-        return movieViewHolder;
+        ScoreViewHolder scoreViewHolder = new ScoreViewHolder(view);
+        return scoreViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScoreViewHolder holder, int position) {
         Score score = getItem(position);
         holder. score_TXT_name.setText(""+score.getName());
-        holder. score_TXT_distance.setText(""+score.getDistance() + "");
         holder. score_TXT_points.setText(""+score.getPoints());
+        holder. score_TXT_distance.setText(""+score.getDistance() + "");
+
 
 
     }
@@ -63,7 +73,12 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
             super(itemView);
             score_TXT_name =    itemView.findViewById(R.id.scoreName);
             score_TXT_distance = itemView.findViewById(R.id.scoreDistance);
-            score_TXT_points    = itemView.findViewById(R.id.scorePoints);
+            score_TXT_points=itemView.findViewById(R.id.scorePoints);
+
+            itemView.setOnClickListener(v -> {
+                if (callBackList != null)
+                   callBackList.rowSelected(getItem(getAdapterPosition()).getLongitude(),getItem(getAdapterPosition()).getLongitude(),getItem(getAdapterPosition()).getName());
+            });
 
         }
         }
