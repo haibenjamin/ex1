@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -27,6 +31,7 @@ private RecyclerView rv;
     private FrameLayout scores_FRAME_map;
     //private FrameLayout listStar_LAY_list;
     private CallBackList callBackList;
+    private static android.location.Location lastKnownLocation;
 
     public void setCallBack_sendClick(CallBackList callBackList) {
         this.callBackList = callBackList;
@@ -36,6 +41,7 @@ private RecyclerView rv;
             callBackList.rowSelected(longitude,latitude,name);
     }
 private ArrayList<Score> scores;
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,7 @@ private ArrayList<Score> scores;
         fragment_list = new ListFragment();
         fragment_map = new MapFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.scores_FRAME_map,fragment_map).commit();
+
 
 
 
@@ -77,7 +84,7 @@ private ArrayList<Score> scores;
             @Override
             public void rowSelected(double longitude, double latitude, String playerName) {
                 SignalGenerator.getInstance().toast(""+playerName+longitude+ " "+latitude, Toast.LENGTH_SHORT);
-             sendScoreCoordinates(longitude, latitude, playerName);
+             fragment_map.zoom(longitude,latitude,playerName);
             }
 
             @Override
@@ -89,6 +96,10 @@ private ArrayList<Score> scores;
 
     public void addScore(Score score){
         this.scores.add((score));
+    }
+    public static Location getLocation(){
+        return lastKnownLocation;
+
     }
 
 

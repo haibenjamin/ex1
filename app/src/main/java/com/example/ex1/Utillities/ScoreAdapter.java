@@ -77,7 +77,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
 
             itemView.setOnClickListener(v -> {
                 if (callBackList != null)
-                   callBackList.rowSelected(getItem(getAdapterPosition()).getLongitude(),getItem(getAdapterPosition()).getLongitude(),getItem(getAdapterPosition()).getName());
+                   callBackList.rowSelected(getItem(getAdapterPosition()).getLatitude(),getItem(getAdapterPosition()).getLongitude(),getItem(getAdapterPosition()).getName());
             });
 
         }

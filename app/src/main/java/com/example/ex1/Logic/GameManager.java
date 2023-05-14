@@ -1,11 +1,17 @@
 package com.example.ex1.Logic;
 
+import com.example.ex1.Fragments.MapFragment;
 import com.example.ex1.Interface.gameOverCallable;
 import com.example.ex1.Score;
+import com.example.ex1.ScoresActivity;
 import com.example.ex1.Utillities.SignalGenerator;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Point;
+import android.location.LocationManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,6 +26,8 @@ public class GameManager extends AppCompatActivity {
     private int points;
     private String name;
     private int distance;
+    private double latitude;
+    private double longtitude;
 
     final int MID =1;
     final int LIVES=3;
@@ -28,6 +36,7 @@ public class GameManager extends AppCompatActivity {
     ShapeableImageView[] player;
     ShapeableImageView[][] obstacles;
     Random rnd;
+    private MapFragment mapFragment;
 
 
     private int mat[][];
@@ -50,8 +59,11 @@ public class GameManager extends AppCompatActivity {
         mid=cols/2;
         points=0;
         distance=0;
+        longtitude=0;
+        latitude=0;
         name="";
         this.gameOverCallable= gameOverCallable;
+        mapFragment=new MapFragment();
 
     }
     public int[][] getMat(){
@@ -77,7 +89,12 @@ public class GameManager extends AppCompatActivity {
     public void gameOverIfNeeded(){
         if(isGameOver()){
             gameOverCallable.GameOver();
-            score = new Score(name,distance,points,0,0);
+            //supposed to get current player location
+
+
+                latitude=(rnd.nextFloat()/10)+32.116834782923036;
+                longtitude=(rnd.nextFloat()/10)+34.815600891407804;
+            score = new Score(name,distance,points, latitude,  longtitude);
             DataManager.getInstance().addScore(score);
             Log.d( "data:",DataManager.getInstance().getScores().get(0).getName());
 
