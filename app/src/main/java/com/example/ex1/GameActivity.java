@@ -2,10 +2,12 @@ package com.example.ex1;
 
 import com.example.ex1.Interface.CallBackPlaySound;
 import com.example.ex1.Interface.CallBackTilt;
+import com.example.ex1.Interface.CallBackUpdatePoints;
 import com.example.ex1.Interface.gameOverCallable;
 import com.example.ex1.Logic.GameManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
@@ -15,6 +17,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
@@ -37,6 +40,7 @@ public class GameActivity extends AppCompatActivity  {
     private ShapeableImageView[][] obstacles;
     private ShapeableImageView[][] collecetables;
     private FloatingActionButton[] fab;
+    private AppCompatTextView currPoints;
     int currPlayerPos;
     private GameManager gm;
     private Timer1 timer;
@@ -47,12 +51,16 @@ public class GameActivity extends AppCompatActivity  {
     private gameOverCallable gameOverCallable;
     private CallBackPlaySound callBackPlaySound;
     private StepDetector sensorManager;
+    private CallBackUpdatePoints callBackUpdatePoints;
 
     public void setGameOverCallback(gameOverCallable gameOverCallable) {
         this.gameOverCallable = gameOverCallable;
     }
     public void setPlaySoundCallBack(CallBackPlaySound callBackPlaySound) {
         this.callBackPlaySound = callBackPlaySound;
+    }
+    public void setUpdateUICallBack(CallBackUpdatePoints callBackUpdatePoints){
+        this.callBackUpdatePoints=callBackUpdatePoints;
     }
 
 
@@ -86,11 +94,14 @@ public class GameActivity extends AppCompatActivity  {
                // LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
               //  @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-
-
                 startActivity(new Intent(GameActivity.this, MainActivity.class));
-
-
+            }
+        });
+        setUpdateUICallBack(new CallBackUpdatePoints() {
+            @Override
+            public void updatePointsUI(int points) {
+                String newText = ""+points;
+                currPoints.setText(newText);
 
             }
         });
@@ -101,7 +112,7 @@ public class GameActivity extends AppCompatActivity  {
         setMode(mode);
         if(name==null|| name.equals(""))
             name="player";
-        gm= new GameManager(ROWS,COLS,gameOverCallable,callBackPlaySound);
+        gm= new GameManager(ROWS,COLS,gameOverCallable,callBackPlaySound,callBackUpdatePoints);
         gm.setName(name);
         timer=new Timer1(gm, ROWS, COLS,player,collecetables, obstacles,main_IMG_hearts,speed);
         timer.startTime();
@@ -279,6 +290,7 @@ public class GameActivity extends AppCompatActivity  {
                 findViewById(R.id.cheese42),
                 findViewById(R.id.cheese43),
                 findViewById(R.id.cheese44) }};
+        currPoints=findViewById(R.id.main_Text_score);
 
 
 

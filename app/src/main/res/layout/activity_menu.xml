@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow_700"
+                android:backgroundTint="@color/black"
                 android:text="start" />
 
             <Button
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow_700"
+                android:backgroundTint="@color/black"
                 android:text="high scores"
                 style="?android:attr/buttonBarButtonStyle" />
 
@@ -47,14 +47,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/main_Text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:background="@color/red_500"
-            android:text="Name : ">
+            android:background="@color/black"
+            android:layout_centerInParent="true"
+            android:text=" Name  ">
 
 
         </androidx.appcompat.widget.AppCompatTextView>
@@ -62,9 +63,9 @@
             android:id="@+id/main_ET_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            android:background="@color/red_500"
-            android:hint="player"/>
+            android:layout_toEndOf="@id/main_Text_name"
+            android:background="@color/white"
+            android:hint=" player "/>
 
 
 
@@ -82,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow_700"
+                android:backgroundTint="@color/black"
                 android:text="slow" />
 
             <Button
@@ -90,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow_700"
+                android:backgroundTint="@color/black"
                 android:layout_weight="1"
                 android:text="fast" />
         </LinearLayout>
@@ -106,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow_700"
+                android:backgroundTint="@color/black"
                 android:layout_weight="1"
                 android:text="sensor mode" />
 
@@ -115,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/yellow_700"
+                android:backgroundTint="@color/black"
                 android:layout_weight="1"
                 android:text="arrows mode" />
 

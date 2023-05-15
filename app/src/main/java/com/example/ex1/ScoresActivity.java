@@ -50,23 +50,14 @@ private ArrayList<Score> scores;
                 .with(this)
                 .load("https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg")
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background);
+                .placeholder(R.drawable.floor);
 
         findViews();
         initViews();
         fragment_list = new ListFragment();
         fragment_map = new MapFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.scores_FRAME_map,fragment_map).commit();
-
-
-
-
-
-
     }
-
-
-
     private void findViews() {
         rv=findViewById(R.id.scores_LST_scores);
 

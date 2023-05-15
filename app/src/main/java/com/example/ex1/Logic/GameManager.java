@@ -2,6 +2,7 @@ package com.example.ex1.Logic;
 
 import com.example.ex1.Fragments.MapFragment;
 import com.example.ex1.Interface.CallBackPlaySound;
+import com.example.ex1.Interface.CallBackUpdatePoints;
 import com.example.ex1.Interface.gameOverCallable;
 
 import com.example.ex1.R;
@@ -55,8 +56,9 @@ public class GameManager extends AppCompatActivity {
    private SignalGenerator signalGenerator;
 
    private gameOverCallable gameOverCallable;
+   private CallBackUpdatePoints callBackUpdatePoints;
 
-    public GameManager(int rows, int cols, gameOverCallable gameOverCallable,CallBackPlaySound callBackPlaySound){
+    public GameManager(int rows, int cols, gameOverCallable gameOverCallable, CallBackPlaySound callBackPlaySound, CallBackUpdatePoints callBackUpdatePoints){
         this.cols=cols;
         this.rows=rows;
         wrong=0;
@@ -74,6 +76,7 @@ public class GameManager extends AppCompatActivity {
         name="";
         this.gameOverCallable= gameOverCallable;
         this.callBackPlaySound=callBackPlaySound;
+        this.callBackUpdatePoints=callBackUpdatePoints;
         mapFragment=new MapFragment();
 
     }
@@ -249,6 +252,11 @@ public class GameManager extends AppCompatActivity {
 
     public void setCurrPlayerPos(int currPlayerPos) {
         this.currPlayerPos=currPlayerPos;
+    }
+
+    public void updatePointsUI(){
+        callBackUpdatePoints.updatePointsUI(points);
+
     }
 }
 

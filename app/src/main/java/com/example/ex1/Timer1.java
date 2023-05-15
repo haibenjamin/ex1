@@ -42,6 +42,7 @@ public class Timer1 {
             handler.postDelayed(this, (int)(DELAY*speed)); //Do it again in a second
             gm.incDistance();
             gm.incPoints();
+            gm.updatePointsUI();
             if(gm.isHit()) {
                 Log.d("isHIT", "hit" );
                 gm.crash();
@@ -53,6 +54,7 @@ public class Timer1 {
 
             if(gm.isCollect()) {
             gm.collect();
+                gm.updatePointsUI();
             Log.d("points","added");
             }
             Log.d("distance:", gm.getDistance()+" meters" );
@@ -124,6 +126,7 @@ public class Timer1 {
 
         if (gm.getWrong() != 0&& gm.getWrong()<=3)
             main_IMG_hearts[main_IMG_hearts.length - gm.getWrong()].setVisibility(View.INVISIBLE);
+
 
         return 0;
     }

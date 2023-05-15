@@ -48,7 +48,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
         Score score = getItem(position);
         holder. score_TXT_name.setText(""+score.getName());
         holder. score_TXT_points.setText(""+score.getPoints());
-        holder. score_TXT_distance.setText(""+score.getDistance() + "");
+        holder. score_TXT_distance.setText(""+score.getDistance() + " meters");
 
 
 
