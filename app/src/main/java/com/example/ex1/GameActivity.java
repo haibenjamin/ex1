@@ -1,17 +1,25 @@
 package com.example.ex1;
 
+import com.example.ex1.Interface.CallBackPlaySound;
 import com.example.ex1.Interface.CallBackTilt;
 import com.example.ex1.Interface.gameOverCallable;
 import com.example.ex1.Logic.GameManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.ex1.Logic.StepDetector;
+import com.example.ex1.Utillities.MyMediaPlayer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -37,10 +45,14 @@ public class GameActivity extends AppCompatActivity  {
     private double speed;
     private int score=0;
     private gameOverCallable gameOverCallable;
+    private CallBackPlaySound callBackPlaySound;
     private StepDetector sensorManager;
 
     public void setGameOverCallback(gameOverCallable gameOverCallable) {
         this.gameOverCallable = gameOverCallable;
+    }
+    public void setPlaySoundCallBack(CallBackPlaySound callBackPlaySound) {
+        this.callBackPlaySound = callBackPlaySound;
     }
 
 
@@ -57,12 +69,28 @@ public class GameActivity extends AppCompatActivity  {
                 .placeholder(R.drawable.floor);
 
         initScreen(obstacles,player,main_IMG_hearts);
+        setPlaySoundCallBack(new CallBackPlaySound() {
+            @Override
+            public void playSound() {
+                MyMediaPlayer mp = new MyMediaPlayer();
+                mp.playAudioFile(getApplicationContext(),R.raw.tom_laughing);
+            }
+        });
         setGameOverCallback(new gameOverCallable() {
             @Override
             public void GameOver() {
                 timer.stopTime();
                 finish();
+               // ActivityCompat.requestPermissions(this, new String[]
+              //          {Manifest.permission.}, 0);
+               // LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+              //  @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+
+
                 startActivity(new Intent(GameActivity.this, MainActivity.class));
+
+
 
             }
         });
@@ -73,7 +101,7 @@ public class GameActivity extends AppCompatActivity  {
         setMode(mode);
         if(name==null|| name.equals(""))
             name="player";
-        gm= new GameManager(ROWS,COLS,gameOverCallable);
+        gm= new GameManager(ROWS,COLS,gameOverCallable,callBackPlaySound);
         gm.setName(name);
         timer=new Timer1(gm, ROWS, COLS,player,collecetables, obstacles,main_IMG_hearts,speed);
         timer.startTime();

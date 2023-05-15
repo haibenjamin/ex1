@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/tom_and_jerry_background"
     tools:context=".GameActivity">
 
     <LinearLayout
@@ -27,6 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow_700"
                 android:text="start" />
 
             <Button
@@ -34,6 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow_700"
                 android:text="high scores"
                 style="?android:attr/buttonBarButtonStyle" />
 
@@ -43,12 +47,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
 
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/red_500"
+            android:text="Name : ">
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/main_ET_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:background="@color/red_500"
             android:hint="player"/>
 
 
@@ -66,12 +81,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow_700"
                 android:text="slow" />
 
             <Button
                 android:id="@+id/fast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow_700"
                 android:layout_weight="1"
                 android:text="fast" />
         </LinearLayout>
@@ -86,6 +105,8 @@
                 android:id="@+id/sensorMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow_700"
                 android:layout_weight="1"
                 android:text="sensor mode" />
 
@@ -93,6 +114,8 @@
                 android:id="@+id/arrowsMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/yellow_700"
                 android:layout_weight="1"
                 android:text="arrows mode" />
 

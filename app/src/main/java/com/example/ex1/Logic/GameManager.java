@@ -1,21 +1,29 @@
 package com.example.ex1.Logic;
 
 import com.example.ex1.Fragments.MapFragment;
+import com.example.ex1.Interface.CallBackPlaySound;
 import com.example.ex1.Interface.gameOverCallable;
+
+import com.example.ex1.R;
 import com.example.ex1.Score;
 import com.example.ex1.ScoresActivity;
+import com.example.ex1.Utillities.MyMediaPlayer;
+import com.example.ex1.Utillities.MySharedPreferences;
 import com.example.ex1.Utillities.SignalGenerator;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.gson.Gson;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Point;
+import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.util.Random;
 
@@ -35,7 +43,9 @@ public class GameManager extends AppCompatActivity {
     final int RIGHT_BOUND=4;
     ShapeableImageView[] player;
     ShapeableImageView[][] obstacles;
+    private MySharedPreferences mySharedPreferences;
     Random rnd;
+    CallBackPlaySound callBackPlaySound;
     private MapFragment mapFragment;
 
 
@@ -46,7 +56,7 @@ public class GameManager extends AppCompatActivity {
 
    private gameOverCallable gameOverCallable;
 
-    public GameManager(int rows, int cols, gameOverCallable gameOverCallable){
+    public GameManager(int rows, int cols, gameOverCallable gameOverCallable,CallBackPlaySound callBackPlaySound){
         this.cols=cols;
         this.rows=rows;
         wrong=0;
@@ -63,6 +73,7 @@ public class GameManager extends AppCompatActivity {
         latitude=0;
         name="";
         this.gameOverCallable= gameOverCallable;
+        this.callBackPlaySound=callBackPlaySound;
         mapFragment=new MapFragment();
 
     }
@@ -90,17 +101,12 @@ public class GameManager extends AppCompatActivity {
         if(isGameOver()){
             gameOverCallable.GameOver();
             //supposed to get current player location
-
-
                 latitude=(rnd.nextFloat()/10)+32.116834782923036;
                 longtitude=(rnd.nextFloat()/10)+34.815600891407804;
             score = new Score(name,distance,points, latitude,  longtitude);
             DataManager.getInstance().addScore(score);
             Log.d( "data:",DataManager.getInstance().getScores().get(0).getName());
-
-
         }
-
     }
 
     public int getCurrPlayerPos() {
@@ -200,6 +206,7 @@ public class GameManager extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         signalGenerator.getInstance().toast(text,duration);
         signalGenerator.getInstance().vibrate(500);
+       callBackPlaySound.playSound();
         wrong++;
 
 

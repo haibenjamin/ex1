@@ -5,12 +5,18 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ex1.Logic.DataManager;
+import com.example.ex1.Utillities.MySharedPreferences;
 import com.example.ex1.Utillities.SignalGenerator;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
+
+
         Glide
                 .with(this)
                 .load("https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg")
@@ -82,7 +90,7 @@ buttons[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mode=SENSORS_MODE;
-               // sensorManager sm = new sensorManager(getApplicationContext());
+               signalGenerator.getInstance().toast("sensors mode",Toast.LENGTH_SHORT);
 
             }
         });
@@ -90,6 +98,7 @@ buttons[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mode=ARROWS_MODE;
+                signalGenerator.getInstance().toast("arrows mode",Toast.LENGTH_SHORT);
 
             }
         });
@@ -97,6 +106,16 @@ buttons[2].setOnClickListener(new View.OnClickListener() {
 
 
             }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("SP:",MySharedPreferences.getInstance().getString("scoresList","-1"));
+        if(DataManager.getInstance()!=null) {
+            String scoresJson = new Gson().toJson(DataManager.getInstance().getScores());
+            MySharedPreferences.getInstance().putString("scoresList", scoresJson);
+        }
+    }
 
 
 

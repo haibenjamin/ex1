@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Score  {
+public class Score implements Comparable<Score>  {
 
     private String name;
     private int distance;
@@ -37,4 +37,8 @@ public class Score  {
     }
     public double getLatitude(){return this.latitude;}
 
+    @Override
+    public int compareTo(Score otherScore) {
+        return name.compareTo(otherScore.name);
+    }
 }

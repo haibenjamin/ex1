@@ -74,6 +74,7 @@ private ArrayList<Score> scores;
       //  listStar_LAY_list = findViewById(R.id.listStar_LAY_list);
     }
     private void initViews() {
+        DataManager.getInstance().Sort();
         ScoreAdapter scoreAdapter = new ScoreAdapter(DataManager.getInstance().getScores());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
