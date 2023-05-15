@@ -102,12 +102,13 @@ public class GameManager extends AppCompatActivity {
     }
     public void gameOverIfNeeded(){
         if(isGameOver()){
-            gameOverCallable.GameOver();
             //supposed to get current player location
-                latitude=(rnd.nextFloat()/10)+32.116834782923036;
-                longtitude=(rnd.nextFloat()/10)+34.815600891407804;
+            latitude=(rnd.nextFloat()/10)+32.116834782923036;
+            longtitude=(rnd.nextFloat()/10)+34.815600891407804;
             score = new Score(name,distance,points, latitude,  longtitude);
             DataManager.getInstance().addScore(score);
+            gameOverCallable.GameOver();
+
             Log.d( "data:",DataManager.getInstance().getScores().get(0).getName());
         }
     }

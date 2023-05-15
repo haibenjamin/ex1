@@ -25,6 +25,7 @@ public class App extends Application {
 
 
     private void loadScores() {
+        String test = MySharedPreferences.getInstance().getString("test","");
         String fromSP = MySharedPreferences.getInstance().getString("scoresList", null);
         if (fromSP != null) {
             Gson gson = new Gson();

@@ -29,9 +29,8 @@ public final class DataManager {
 
     public static void setList(ArrayList scoreList) {
 
-           // scores=new ArrayList<>();
-         //   scores.addAll(scoreList);
-           // scores.add(new Score((scoreList.get(i).toString()))
+            scores=new ArrayList<>();
+            scores.addAll(scoreList);
 
 
         }

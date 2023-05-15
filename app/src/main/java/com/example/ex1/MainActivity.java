@@ -110,11 +110,8 @@ buttons[2].setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("SP:",MySharedPreferences.getInstance().getString("scoresList","-1"));
-        if(DataManager.getInstance()!=null) {
-            String scoresJson = new Gson().toJson(DataManager.getInstance().getScores());
-            MySharedPreferences.getInstance().putString("scoresList", scoresJson);
-        }
+
+
     }
 
 

@@ -4,6 +4,7 @@ import com.example.ex1.Interface.CallBackPlaySound;
 import com.example.ex1.Interface.CallBackTilt;
 import com.example.ex1.Interface.CallBackUpdatePoints;
 import com.example.ex1.Interface.gameOverCallable;
+import com.example.ex1.Logic.DataManager;
 import com.example.ex1.Logic.GameManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,10 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.ex1.Logic.StepDetector;
 import com.example.ex1.Utillities.MyMediaPlayer;
+import com.example.ex1.Utillities.MySharedPreferences;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.gson.Gson;
 
 public class GameActivity extends AppCompatActivity  {
 
@@ -95,6 +98,13 @@ public class GameActivity extends AppCompatActivity  {
               //  @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
                 startActivity(new Intent(GameActivity.this, MainActivity.class));
+                Log.d("SP:", MySharedPreferences.getInstance().getString("scoresList","-1"));
+                if(DataManager.getInstance()!=null) {
+                    String scoresJson = new Gson().toJson(DataManager.getInstance().getScores());
+                    MySharedPreferences.getInstance().putString("scoresList", scoresJson);
+                    String test=MySharedPreferences.getInstance().getString("scoresList","");
+                    int i=5;
+                }
             }
         });
         setUpdateUICallBack(new CallBackUpdatePoints() {
